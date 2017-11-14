@@ -17,6 +17,9 @@ package com.karumi.todoapiclient;
 
 import com.karumi.todoapiclient.dto.TaskDto;
 import java.util.List;
+
+import com.karumi.todoapiclient.exception.ItemNotFoundException;
+import com.karumi.todoapiclient.exception.UnknownErrorException;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -25,6 +28,7 @@ import static org.junit.Assert.assertFalse;
 
 public class TodoApiClientTest extends MockWebServerTest {
 
+  private static final String ANY_KEY = "any";
   private TodoApiClient apiClient;
 
   @Before public void setUp() throws Exception {
@@ -69,10 +73,36 @@ public class TodoApiClientTest extends MockWebServerTest {
     assertTaskContainsExpectedValues(tasks.get(0));
   }
 
+  @Test public void sendsAddTaskRequestProper() throws Exception{
+    enqueueMockResponse();
+
+    apiClient.addTask(new TaskDto("1","2","Finish this kata",false));
+
+    assertRequestBodyEquals("addTaskRequest.json");
+  }
+
+  @Test (expected = UnknownErrorException.class)
+  public void shouldReturnErrorCode() throws Exception{
+    enqueueMockResponse(418 );
+
+    apiClient.getAllTasks();
+  }
+
+  @Test (expected = ItemNotFoundException.class)
+  public void shouldReturnErrorItemNotFoundOnAnyIdTaskRequested() throws Exception{
+    enqueueMockResponse(404 );
+
+
+    apiClient.getTaskById(ANY_KEY);
+
+
+  }
+
   private void assertTaskContainsExpectedValues(TaskDto task) {
     assertEquals(task.getId(), "1");
     assertEquals(task.getUserId(), "1");
     assertEquals(task.getTitle(), "delectus aut autem");
     assertFalse(task.isFinished());
   }
+
 }
