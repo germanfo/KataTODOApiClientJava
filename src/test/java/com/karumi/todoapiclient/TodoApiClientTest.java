@@ -81,6 +81,17 @@ public class TodoApiClientTest extends MockWebServerTest {
     assertRequestBodyEquals("addTaskRequest.json");
   }
 
+  @Test public void shouldAddTaskResponseBeRight() throws Exception {
+    enqueueMockResponse(200, "addTaskResponse.json");
+
+    TaskDto taskSent = new TaskDto("1", "1", "delectus aut autem", false);
+
+    TaskDto taskReceived = apiClient.addTask(taskSent);
+
+    assertTaskContainsExpectedValues(taskReceived);
+
+  }
+
   @Test (expected = UnknownErrorException.class)
   public void shouldReturnErrorCode() throws Exception {
     enqueueMockResponse(418);
