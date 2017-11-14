@@ -103,4 +103,14 @@ public class TodoApiClientTest extends MockWebServerTest {
     assertFalse(task.isFinished());
   }
 
+
+  @Test
+  public void parsesTasksProperlyGettingTaskById() throws Exception {
+    enqueueMockResponse(200, "getTaskByIdResponse.json");
+
+    apiClient.getTaskById("1");
+
+    assertTaskContainsExpectedValues(new TaskDto("1", "1", "delectus aut autem", false));
+  }
+
 }
