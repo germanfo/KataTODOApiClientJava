@@ -108,9 +108,9 @@ public class TodoApiClientTest extends MockWebServerTest {
   public void parsesTasksProperlyGettingTaskById() throws Exception {
     enqueueMockResponse(200, "getTaskByIdResponse.json");
 
-    apiClient.getTaskById("1");
+    TaskDto taskDto = apiClient.getTaskById("1");
 
-    assertTaskContainsExpectedValues(new TaskDto("1", "1", "delectus aut autem", false));
+    assertTaskContainsExpectedValues(taskDto);
   }
 
 }
