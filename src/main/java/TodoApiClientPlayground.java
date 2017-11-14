@@ -24,6 +24,7 @@ public class TodoApiClientPlayground {
     TodoApiClient todoApiClient = new TodoApiClient();
     try {
 
+
       // Get all tasks.
       List<TaskDto> tasks = todoApiClient.getAllTasks();
       print(tasks);
