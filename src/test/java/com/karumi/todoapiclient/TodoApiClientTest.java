@@ -76,21 +76,21 @@ public class TodoApiClientTest extends MockWebServerTest {
   @Test public void sendsAddTaskRequestProper() throws Exception {
     enqueueMockResponse();
 
-    apiClient.addTask(new TaskDto("1","2","Finish this kata",false));
+    apiClient.addTask(new TaskDto("1", "2", "Finish this kata", false));
 
     assertRequestBodyEquals("addTaskRequest.json");
   }
 
   @Test (expected = UnknownErrorException.class)
   public void shouldReturnErrorCode() throws Exception {
-    enqueueMockResponse(418 );
+    enqueueMockResponse(418);
 
     apiClient.getAllTasks();
   }
 
   @Test (expected = ItemNotFoundException.class)
   public void shouldReturnErrorItemNotFoundOnAnyIdTaskRequested() throws Exception {
-    enqueueMockResponse(404 );
+    enqueueMockResponse(404);
 
 
     apiClient.getTaskById(ANY_KEY);
