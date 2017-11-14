@@ -25,6 +25,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.mockito.Mockito.mock;
 
 public class TodoApiClientTest extends MockWebServerTest {
 
@@ -84,7 +85,8 @@ public class TodoApiClientTest extends MockWebServerTest {
   @Test public void shouldAddTaskResponseBeRight() throws Exception {
     enqueueMockResponse(200, "addTaskResponse.json");
 
-    TaskDto taskSent = new TaskDto("1", "1", "delectus aut autem", false);
+    //TaskDto taskSent = new TaskDto("1", "1", "delectus aut autem", false);
+    TaskDto taskSent = mock(TaskDto.class);
 
     TaskDto taskReceived = apiClient.addTask(taskSent);
 
