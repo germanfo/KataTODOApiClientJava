@@ -73,7 +73,7 @@ public class TodoApiClientTest extends MockWebServerTest {
     assertTaskContainsExpectedValues(tasks.get(0));
   }
 
-  @Test public void sendsAddTaskRequestProper() throws Exception{
+  @Test public void sendsAddTaskRequestProper() throws Exception {
     enqueueMockResponse();
 
     apiClient.addTask(new TaskDto("1","2","Finish this kata",false));
@@ -82,20 +82,18 @@ public class TodoApiClientTest extends MockWebServerTest {
   }
 
   @Test (expected = UnknownErrorException.class)
-  public void shouldReturnErrorCode() throws Exception{
+  public void shouldReturnErrorCode() throws Exception {
     enqueueMockResponse(418 );
 
     apiClient.getAllTasks();
   }
 
   @Test (expected = ItemNotFoundException.class)
-  public void shouldReturnErrorItemNotFoundOnAnyIdTaskRequested() throws Exception{
+  public void shouldReturnErrorItemNotFoundOnAnyIdTaskRequested() throws Exception {
     enqueueMockResponse(404 );
 
 
     apiClient.getTaskById(ANY_KEY);
-
-
   }
 
   private void assertTaskContainsExpectedValues(TaskDto task) {
