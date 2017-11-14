@@ -113,4 +113,13 @@ public class TodoApiClientTest extends MockWebServerTest {
     assertTaskContainsExpectedValues(taskDto);
   }
 
+  @Test
+  public void shouldRequestAValidTaskByIdInTheUrl() throws Exception {
+    enqueueMockResponse();
+
+    apiClient.getTaskById(ANY_KEY);
+
+    assertGetRequestSentTo("/todos/" + ANY_KEY);
+  }
+
 }
