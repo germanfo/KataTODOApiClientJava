@@ -33,7 +33,7 @@ public class TodoApiClientTest extends MockWebServerTest {
     apiClient = new TodoApiClient(mockWebServerEndpoint);
   }
 
-  @Test public void sendsAcceptTypeHeaders() throws Exception {
+  @Test public void sendsAcceptHeader() throws Exception {
     enqueueMockResponse();
 
     apiClient.getAllTasks();
@@ -42,7 +42,7 @@ public class TodoApiClientTest extends MockWebServerTest {
   }
 
 
-  @Test public void sendsContentTypeHeaders() throws Exception {
+  @Test public void sendsContentTypeHeader() throws Exception {
     enqueueMockResponse();
 
     apiClient.getAllTasks();
